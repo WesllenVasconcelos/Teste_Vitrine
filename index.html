@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Balloon box - Catálogo Digital</title>
+
+        <link rel="stylesheet" href="./css/bootstrap.min.css" />
+        <link rel="stylesheet" href="./css/fontawesome.css" />
+        <link rel="stylesheet" href="./css/animate.css" />
+        <link rel="stylesheet" href="./css/main.css" />
+        <link rel="stylesheet" href="./css/responsivo.css" />
+
+    </head>
+
+    <body>
+
+        <div class="container-mensagens" id="container-mensagens">
+
+        </div>
+
+        <a class="botao-carrinho animated bounceIn hidden" onclick="cardapio.metodos.abrirCarrinho(true)">
+            <div class="badge-total-carrinho">0</div>
+            <i class="fa fa-shopping-bag"></i>
+        </a>
+
+        <section class="header">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg pl-0 pr-0 col-one">
+                    <a class="navbar-brand wow fadeIn" href="#">
+                        <img src="img/cardapio/LOGO-BALLOON-BOX-02.png" width="160" class="img-logo" />
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown">
+                        <span class="navbar-toggler-icon">
+                            <i class="fas fa-bars"></i>
+                        </span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav ml-auto mr-auto wow fadeIn">
+                         
+                            <li class="nav-item">
+                                <a href="#cardapio" class="nav-link"><b>Catálogo Digital</b></a>
+                            </li>
+                        </ul>
+                        <a class="btn btn-white btn-icon wow fadeIn" onclick="cardapio.metodos.abrirCarrinho(true)">
+                            Meu carrinho <span class="icon">
+                                <div class="container-total-carrinho badge-total-carrinho hidden">0</div>
+                                <i class="fa fa-shopping-bag"></i>
+                            </span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </section>
+
+        
+        <section class="banner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-one">
+                        <div class="d-flex text-banner">
+                            <h1 class="wow fadeInLeft"><b>Sua boutique de balão é <b class="color-primary">Balloon box.</b></b></h1>
+                            <p class="wow fadeInLeft delay-02s">
+                                Aproveite nosso catálogo! Escolha o que desejar e recebe em sua casa de forma rápida e segura.
+                            </p>
+                            <div class="wow fadeIn delay-05s">
+                                <a href="#cardapio" class="btn btn-yellow mt-4 mr-3">
+                                    Ver catálogo digital
+                                </a>
+                                <a href="#" class="btn btn-white btn-icon-left mt-4" id="btnLigar">
+                                    <span class="icon-left">
+                                        <i class="fa fa-phone"></i>
+                                    </span>
+                                    (92) 98561-5995
+                                </a>
+                            </div>
+                        </div>
+                        <a href="https://www.instagram.com/sistemalogos/" target="_blank" class="btn btn-sm btn-white btn-social mt-4 mr-3 wow fadeIn delay-05s">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a class="btn btn-sm btn-white btn-social mt-4 mr-3 wow fadeIn delay-05s">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="btn btn-sm btn-white btn-social mt-4 wow fadeIn delay-05s">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+
+                    <div class="col-6 no-mobile">
+                        <div class="d-flex img-banner wow fadeIn delay-05s mr-5">
+                            <img src="img/cardapio/LOGO-BALLOON-BOX-02.png" />
+                        </div>
+                        <div class="card card-case wow fadeInRight delay-07s">
+                            "Compre com segurança e 
+                            <br>Receba no conforto do seu lar."<br>
+                          
+                            <span class="card-case-name">
+                                <b>Balloon Box</b>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="cardapio" id="cardapio">
+
+            <div class="background-cardapio"></div>
+
+            <div class="container">
+                <div class="row">
+
+                    
+
+                    <div class="col-12 col-one text-center mb-5 wow fadeIn">
+                        <span class="hint-title"><b>Catálogo digital</b></span>
+                        <h1 class="title">
+                            <b>Conheça nossos produtos</b>
+                        </h1>
+                    </div>
+
+                    <div class="col-12 col-one text-center mb-5 wow fadeIn">
+        
+                        <div class="searchBar">
+                            <div class="search">
+                               <input type="text" id="inputPesquisa" class="searchTerm"  placeholder="Está procurando por ?">
+                               <button type="submit" class="searchButton" onclick="cardapio.metodos.pesquisar()" >
+                                 <i class="fa fa-search"></i>
+                              </button>
+                            </div>
+                         </div>
+
+                    </div>
+                    
+
+                    <div class="col-12 col-one container-menu wow fadeInUp">
+                        <a id="menu-categoria1" class="m-2 btn btn-white btn-sm mr-3 active" onclick="cardapio.metodos.obterItensCardapio(['categoria1', 'categoria2', 'categoria3'])">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z"/>
+                              </svg>&nbsp; Chapéu + Colher + Copo
+                        </a>
+
+                        <!-- 
+                        <a id="menu-categoria2" class="m-2 btn btn-white btn-sm mr-3" onclick="cardapio.metodos.obterItensCardapio('categoria2')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z"/>
+                              </svg>&nbsp; Colher
+                        </a>
+                        
+                        <a id="menu-categoria3" class="m-2 btn btn-white btn-sm mr-3" onclick="cardapio.metodos.obterItensCardapio('categoria3')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z"/>
+                              </svg>&nbsp; Copo
+                        </a>
+                        teste-->
+
+                        <a id="menu-categoria4" class="m-2 btn btn-white btn-sm mr-3" onclick="cardapio.metodos.obterItensCardapio('categoria4')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z"/>
+                              </svg>&nbsp; Faixas
+                        </a>
+                        <a id="menu-categoria5" class="m-2 btn btn-white btn-sm mr-3" onclick="cardapio.metodos.obterItensCardapio('categoria5')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z"/>
+                              </svg>&nbsp; Guardanapos
+                        </a>
+                        <a id="menu-categoria6" class="m-2 btn btn-white btn-sm mr-3" onclick="cardapio.metodos.obterItensCardapio('categoria6')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z"/>
+                              </svg>&nbsp; Pratos
+                        </a>
+                        <a id="menu-categoria7" class="m-2 btn btn-white btn-sm mr-3" onclick="cardapio.metodos.obterItensCardapio('categoria7')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z"/>
+                              </svg>&nbsp; Velas
+                        </a>
+                        <a id="menu-categoria8" class="m-2 btn btn-white btn-sm mr-3" onclick="cardapio.metodos.obterItensCardapio('categoria8')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z"/>
+                              </svg>&nbsp; Garfo
+                        </a>
+                        <a id="menu-categoria9" class="m-2 btn btn-white btn-sm mr-3" onclick="cardapio.metodos.obterItensCardapio('categoria9')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z"/>
+                              </svg>&nbsp; Faca
+                        </a>
+                        <a id="menu-categoria10" class="m-2 btn btn-white btn-sm mr-3" onclick="cardapio.metodos.obterItensCardapio('categoria10')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z"/>
+                              </svg>&nbsp; Kit
+                        </a>
+                        <a id="menu-categoria11" class="m-2 btn btn-white btn-sm mr-3" onclick="cardapio.metodos.obterItensCardapio('categoria11')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z"/>
+                              </svg>&nbsp; Bandeijas
+                        </a>
+                        <a id="menu-categoria12" class="m-2 btn btn-white btn-sm mr-3" onclick="cardapio.metodos.obterItensCardapio('categoria12')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z"/>
+                              </svg>&nbsp; Boleiras
+                        </a>
+                        <a id="menu-categoria13" class="m-2 btn btn-white btn-sm mr-3" onclick="cardapio.metodos.obterItensCardapio('categoria13')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z"/>
+                              </svg>&nbsp; Taças
+                        </a>
+                        <a id="menu-categoria14" class="m-2 btn btn-white btn-sm mr-3" onclick="cardapio.metodos.obterItensCardapio('categoria14')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z"/>
+                              </svg>&nbsp; Placa
+                        </a>
+                        <a id="menu-categoria15" class="m-2 btn btn-white btn-sm mr-3" onclick="cardapio.metodos.obterItensCardapio('categoria15')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z"/>
+                              </svg>&nbsp; Tiara
+                        </a>
+                        <a id="menu-categoria16" class="m-2 btn btn-white btn-sm mr-3" onclick="cardapio.metodos.obterItensCardapio('categoria16')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z"/>
+                              </svg>&nbsp; Topo de Bolo
+                        </a>
+                        <a id="menu-categoria17" class="m-2 btn btn-white btn-sm mr-3" onclick="cardapio.metodos.obterItensCardapio('categoria17')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z"/>
+                              </svg>&nbsp; Cortina
+                        </a>
+                    </a>
+                    <a id="menu-categoria18" class="m-2 btn btn-white btn-sm mr-3" onclick="cardapio.metodos.obterItensCardapio('categoria18')">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z"/>
+                          </svg>&nbsp; Balões
+                    </a>
+                        <a id="menu-categoria19" class="m-2 btn btn-white btn-sm mr-3" onclick="cardapio.metodos.obterItensCardapio('categoria19')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z"/>
+                              </svg>&nbsp; Outros
+                        </a>
+
+                    </div>
+
+                    <div class="col-12 col-one">
+                        <div class="row" id="itensCardapio">
+
+                            
+
+                        </div>
+                    </div>
+                
+                    <div class="col-12 col-one text-center wow fadeInUp">
+                        <a id="btnVerMais" class="btn btn-white btn-sm" onclick="cardapio.metodos.verMais()">
+                            Ver mais produtos
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        
+
+        <section class="reserva" id="reservas">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-one">
+
+                        <div class="card-secondary wow fadeInUp">
+
+                            <div class="row">
+
+                                <div class="col-12 col-lg-7 col-md-7 col-sm-12">
+                                    <span class="hint-title"><b>Entre em Contato</b></span>
+                                    <h1 class="title">
+                                        <b>Deseja Falar Conosco?</b>
+                                    </h1>
+                                    <p class="pr-5">
+                                        Está com alguma dúvida? Mande uma mensagem clicando no botão abaixo.
+                                        <br>
+                                        
+                                    </p>
+                                    <a class="btn btn-yellow mt-4 wow fadeIn delay-05s" href="#" id="btnReserva" target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
+                                            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                                          </svg> Contato
+                                    </a>
+                                </div>
+
+                                <div class="col-5 no-mobile">
+                                    <div class="card-reserva"></div>
+                                    <div class="d-flex img-banner">
+                                        <img src="./img/icone-reserva.svg" />
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-12 col-lg-3 col-md-3 col-sm-12 col-one container-logo-footer wow fadeIn">
+                        <img class="logo-footer" src="img/cardapio/LOGO-BALLOON-BOX-02.png" />
+                    </div>
+
+                    <div class="col-12 col-lg-6 col-md-6 col-sm-12 col-one container-texto-footer wow fadeIn">
+                        <p class="mb-0">
+                            <b>Balloon Box -</b> &copy; Todos os direitos reservados
+                        </p>
+                    </div>
+
+                    <div class="col-12 col-lg-3 col-md-3 col-sm-12 col-one container-redes-footer wow fadeIn">
+                        <a class="btn btn-sm btn-white btn-social mr-3">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a class="btn btn-sm btn-white btn-social mr-3">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="btn btn-sm btn-white btn-social">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+
+
+        <div class="modal-full animated fadeIn hidden" id="modalCarrinho">
+
+            <div class="m-header">
+                <div class="container">
+                    <a class="btn btn-white btn-sm float-right" onclick="cardapio.metodos.abrirCarrinho(false)">
+                        Fechar
+                    </a>
+                    <div class="etapas">
+                        <div class="etapa etapa1 active">1</div>
+                        <div class="etapa etapa2">2</div>
+                        <div class="etapa etapa3">3</div>
+                    </div>
+                    <p class="title-carrinho mt-4">
+                        <b id="lblTituloEtapa">Seu carrinho:</b>
+                    </p>
+                </div>
+            </div>
+
+            <div class="m-body">
+                <div class="container">
+
+                    <div id="itensCarrinho" class="row mr-0 ml-0 animated fadeIn hidden">
+
+                    </div>
+
+                    <div id="localEntrega" class="row mr-0 ml-0 animated fadeIn hidden">
+
+                        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                            <div class="form-group container-cep">
+                                <label>CEP:</label>
+                                <input id="txtCEP" type="text" class="form-control" />
+                                <a class="btn btn-yellow btn-sm" onclick="cardapio.metodos.buscarCep()">
+                                    <i class="fa fa-search"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-8 no-mobile"></div>
+
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Endereço:</label>
+                                <input id="txtEndereco" type="text" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Bairro:</label>
+                                <input id="txtBairro" type="text" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                            <div class="form-group">
+                                <label>Número:</label>
+                                <input id="txtNumero" type="text" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Cidade:</label>
+                                <input id="txtCidade" type="text" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Complemento:</label>
+                                <input id="txtComplemento" type="text" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-2 col-md-2 col-sm-12">
+                            <div class="form-group">
+                                <label>UF:</label>
+                                <select id="ddlUf" class="form-control">
+                                    <option value="-1">...</option>
+                                    <option value="AM">AM</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="resumoCarrinho" class="row mr-0 ml-0 animated fadeIn hidden">
+                        <div class="col-12">
+                            <p class="title-carrinho mt-4">
+                                <b>Itens do pedido:</b>
+                            </p>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="row" id="listaItensResumo">
+
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <p class="title-carrinho mt-4">
+                                <b>Local da entrega:</b>
+                            </p>
+                        </div>
+
+                        <div class="col-12 item-carrinho resumo">
+                            <div class="img-map">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </div>
+                            <div class="dados-produto">
+                                <p class="texto-endereco">
+                                    <b id="resumoEndereco"></b>
+                                </p>
+                                <p class="cidade-endereco" id="cidadeEndereco"></p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="m-footer">
+                <div class="container">
+                    <div class="container-total text-right mb-4">
+                        <p class="mb-0">
+                            <span>Subtotal:</span>
+                            <span id="lblSubTotal">R$ 0,00</span>
+                        </p>
+                        <p class="mb-0 texto-entrega">
+                            <span><i class="fas fa-motorcycle"></i> Entrega:</span>
+                            <span id="lblValorEntrega">+ R$ 0,00</span>
+                        </p>
+                        <p class="mb-0 texto-total">
+                            <span><b>Total:</b></span>
+                            <span class="valor-total"><b id="lblValorTotal">R$ 0,00</b></span>
+                        </p>
+                    </div>
+
+                    <a onclick="cardapio.metodos.carregarEndereco()" class="btn btn-yellow float-right" id="btnEtapaPedido">
+                        Continuar
+                    </a>
+                    <a onclick="cardapio.metodos.resumoPedido()" class="btn btn-yellow float-right hidden" id="btnEtapaEndereco">
+                        Revisar pedido
+                    </a>
+                    <a href="#" class="btn btn-yellow float-right hidden" id="btnEtapaResumo" target="_blank">
+                        Enviar pedido
+                    </a>
+
+                    <a onclick="cardapio.metodos.voltarEtapa()" class="btn btn-white float-right mr-3 hidden" id="btnVoltar">
+                        Voltar
+                    </a>
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <script type="text/javascript" src="./js/jquery-1.12.4.min.js"></script>
+        <script type="text/javascript" src="./js/modernizr-3.5.0.min.js"></script>
+        <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="./js/popper.min.js"></script>
+        <script type="text/javascript" src="./js/wow.min.js"></script>
+        <script type="text/javascript" src="./js/dados.js"></script>
+        <script type="text/javascript" src="./js/app.js"></script>
+
+        <script>new WOW().init();</script>
+
+    </body>
+
+</html>
