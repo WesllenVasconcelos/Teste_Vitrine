@@ -4,7 +4,23 @@ $(document).ready(function () {
 
 var cardapio = {};
 
-var todosItensArray = Object.values(MENU).flat();
+var todosItensArray = [];
+
+Object.keys(MENU).forEach(categoria => {
+    // Iterar sobre os itens da categoria atual
+    MENU[categoria].forEach(item => {
+        // Adicionar o item com sua categoria ao novo array
+        todosItensArray.push({
+            categoria: categoria,
+            id: item.id,
+            img: item.img,
+            name: item.name,
+            dsc: item.dsc,
+            price: item.price
+        });
+    });
+});
+
 var categoriasAtivas = [];
 var MEU_CARRINHO = [];
 var MEU_ENDERECO = null;
@@ -20,9 +36,18 @@ cardapio.eventos = {
         cardapio.metodos.obterItensCardapio();
         cardapio.metodos.carregarBotaoLigar();
         cardapio.metodos.carregarBotaoReserva();
+        
+        $("#inputPesquisa").on("keyup", function(event) {
+        if (event.key === "Enter") {
+            var termoPesquisa = $(this).val();
+            cardapio.metodos.obterItensPorPesquisa(termoPesquisa);}
+        });
     }
 
+    
+
 }
+
 
 cardapio.metodos = {
 
@@ -46,7 +71,8 @@ cardapio.metodos = {
             var itensCategoria = MENU[categoria];
     
             // Adiciona os itens ao array geral
-            todosItens = todosItens.concat(itensCategoria);
+            todosItens = todosItens.concat(itensCategoria.map(item => ({ ...item, categoria: categoria })));
+
         });
 
         console.log("Tamanho total da lista -> ", todosItens.length);
@@ -66,7 +92,8 @@ cardapio.metodos = {
             let temp = cardapio.templates.item.replace(/\${img}/g, todosItens[i].img)
                 .replace(/\${nome}/g, todosItens[i].name)
                 .replace(/\${preco}/g, todosItens[i].price.toFixed(2).replace('.', ','))
-                .replace(/\${id}/g, todosItens[i].id);
+                .replace(/\${id}/g, todosItens[i].id)
+                .replace(/\${categoria}/g, todosItens[i].categoria);
     
             // Adiciona os itens ao #itensCardapio
             $("#itensCardapio").append(temp);
@@ -107,6 +134,15 @@ cardapio.metodos = {
         //$("#btnVerMais").addClass('hidden');
     },
 
+    handleRouteChange: () => {
+        // Obtém a parte da rota após o '#' (hash) na URL
+        var route = window.location.hash.slice(1);
+    
+        console.log("Rota atual:", route);
+    
+        // Chama a função obterItensCardapio com a categoria extraída da rota
+        cardapio.metodos.obterItensCardapio(route ? [route] : [], false);
+    },
 
     // Função para obter itens com base na pesquisa
     obterItensPorPesquisa: (pesquisa = '') => {
@@ -115,7 +151,7 @@ cardapio.metodos = {
 
     // Filtra os itens com base na pesquisa
     var itensPesquisados = todosItensArray.filter(item =>
-        item.name.toLowerCase().includes(pesquisa)
+        item.name.toLowerCase().includes(pesquisa) || item.categoria.toLowerCase().includes(pesquisa)
     );
 
     // Limpa o conteúdo antes de adicionar os itens
@@ -126,7 +162,8 @@ cardapio.metodos = {
         let temp = cardapio.templates.item.replace(/\${img}/g, item.img)
             .replace(/\${nome}/g, item.name)
             .replace(/\${preco}/g, item.price.toFixed(2).replace('.', ','))
-            .replace(/\${id}/g, item.id);
+            .replace(/\${id}/g, item.id)
+            .replace(/\${categoria}/g, item.categoria);
 
         // Adiciona os itens ao #itensCardapio
         $("#itensCardapio").append(temp);
@@ -137,6 +174,19 @@ cardapio.metodos = {
     pesquisar: () => {
         var pesquisa = $("#inputPesquisa").val();
         cardapio.metodos.obterItensPorPesquisa(pesquisa);
+    },
+
+    mostrarFotodoProdutoAmpliada: (img) =>{
+        $("#popup_image_zoom").html('');
+        $("#popup_image_zoom").removeClass('hidden');
+
+        let temp = cardapio.templates.itemPopup.replace(/\${img}/g, img);
+        $("#popup_image_zoom").append(temp);
+        console.log(img);
+    },
+
+    fecharPopupImagemAmpliada: () => {
+        $("#popup_image_zoom").addClass('hidden');
     },
 
 
@@ -160,16 +210,16 @@ cardapio.metodos = {
     },
 
     // adicionar ao carrinho o item do cardápio
-    adicionarAoCarrinho: (id) => {
+    adicionarAoCarrinho: (id,categoria) => {
 
         let qntdAtual = parseInt($("#qntd-" + id).text());
 
         if (qntdAtual > 0) {
 
             // obter a categoria ativa
-            var categoria = $(".container-menu a.active").attr('id').split('menu-')[1];
-
+            //var categoria = $(".container-menu a.active").attr('id').split('menu-')[1];
             // obtem a lista de itens
+            
             let filtro = MENU[categoria];
 
             // obtem o item
@@ -643,16 +693,22 @@ cardapio.metodos = {
 
 }
 
+// Adiciona um ouvinte de evento para a mudança de hash na URL
+window.addEventListener('hashchange', cardapio.metodos.handleRouteChange);
+
+// Adiciona um ouvinte de evento para a carga inicial da página
+window.addEventListener('load', cardapio.metodos.handleRouteChange);
+
 cardapio.templates = {
 
     item: `
         <div class="col-12 col-lg-3 col-md-3 col-sm-6 mb-5 animated fadeInUp">
             <div class="card card-item" id="\${id}">
-                <div class="img-produto">
+                <div class="img-produto" onclick="cardapio.metodos.mostrarFotodoProdutoAmpliada('\${img}')">
                     <img src="\${img}" />
                 </div>
                 <p class="title-produto text-center mt-4">
-                    <b>\${nome}</b>
+                    <b id="\${categoria}">\${nome}</b>
                 </p>
                 <p class="price-produto text-center">
                     <b>R$ \${preco}</b>
@@ -661,7 +717,7 @@ cardapio.templates = {
                     <span class="btn-menos" onclick="cardapio.metodos.diminuirQuantidade('\${id}')"><i class="fas fa-minus"></i></span>
                     <span class="add-numero-itens" id="qntd-\${id}">0</span>
                     <span class="btn-mais" onclick="cardapio.metodos.aumentarQuantidade('\${id}')"><i class="fas fa-plus"></i></span>
-                    <span class="btn btn-add" onclick="cardapio.metodos.adicionarAoCarrinho('\${id}')"><i class="fa fa-shopping-bag"></i></span>
+                    <span class="btn btn-add" onclick="cardapio.metodos.adicionarAoCarrinho('\${id}','\${categoria}')"><i class="fa fa-shopping-bag"></i></span>
                 </div>
             </div>
         </div>
@@ -681,6 +737,8 @@ cardapio.templates = {
                 <span class="add-numero-itens" id="qntd-carrinho-\${id}">\${qntd}</span>
                 <span class="btn-mais" onclick="cardapio.metodos.aumentarQuantidadeCarrinho('\${id}')"><i class="fas fa-plus"></i></span>
                 <span class="btn btn-remove no-mobile" onclick="cardapio.metodos.removerItemCarrinho('\${id}')"><i class="fa fa-times"></i></span>
+                <button class="btn btn-remove" onclick="cardapio.metodos.removerItemCarrinho('\${id}')"><i class="fa fa-times"></i></button>
+
             </div>
         </div>
     `,
@@ -702,6 +760,13 @@ cardapio.templates = {
                 x <b>\${qntd}</b>
             </p>
         </div>
+    `,
+
+    itemPopup:`
+            <div class="popup-content-image-zoom">
+                    <span class="fechar" onclick="cardapio.metodos.fecharPopupImagemAmpliada()">&times;</span>
+                    <img class="image-zoom" src="\${img}" alt="Imagem Ampliada">
+            </div>
     `
 
 }
