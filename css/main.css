@@ -236,33 +236,71 @@ a.navbar-brand {
     font-size: 20px;
   }
 
-  .searchTerm {
+.searchTerm {
     width: 80%;
+    height: 40px;
     border: 3px solid #cf20b8;
     border-radius: 5px;
     outline: none;
-  }
-
-.background-servicos {
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 500px;
-    background-image: url(../img/bg-icons-2.png);
 }
 
-.cardapio {
-    padding-top: 50px;
-    padding-bottom: 150px;
-}
+    .dropdown {
+    position: relative;
+    display: inline-block;
+    }
 
-.cardapio .background-cardapio {
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 500px;
-    background-image: url(../img/bg-icons-1.png);
-}
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 300px; /* Ajuste a largura conforme necessário */
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        padding: 12px;
+        z-index: 1;
+        text-align: left; /* Alinhar à esquerda */
+        font-size: 16px; /* Ajuste o tamanho da fonte conforme necessário */
+    }
+
+    .category {
+
+        display: block;
+        margin-bottom: 8px;
+        padding-left: 8px;
+        background-color: #ffe2fb;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .subcategory {
+        display: none;
+        margin-left: 20px;
+    }
+
+    .subcategory label {
+        display: block; /* Exibir os labels em blocos (um abaixo do outro) */
+        margin-bottom: 8px; /* Espaçamento entre os labels */
+    }
+
+
+    .subcategory input {
+        margin-right: 8px;
+        width: 18px; /* Ajuste a largura conforme necessário */
+        height: 18px; /* Ajuste a altura conforme necessário */
+    }
+
+    .subcategory input[type="checkbox"]:checked + label::before {
+        background-color: pink; /* Cor de fundo quando o checkbox está marcado */
+        border-color: pink; /* Cor da borda quando o checkbox está marcado */
+    }
+
+    .category.active {
+        font-weight: bold;
+        color: #fff;
+        background-color: #cf20b8;
+        border-radius: 8px;
+    }
+
+
 
 .container-menu {
     margin-bottom: 40px;
@@ -828,7 +866,7 @@ select.form-control {
     max-height: 90%;
   
     /* Configuração responsiva para larguras menores ou iguais a 600px */
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 900px) {
       width: 90%;
       max-width: 90%;
       height: auto;
@@ -837,19 +875,18 @@ select.form-control {
   }
   
   .image-zoom {
-    height: auto; /* Altura automática para ajustar a proporção */
-    width: 50%; /* A largura preenche a div pai */
-    max-width: 50%; /* Garante que a largura não exceda a largura da div pai */
+    /*height: 80%;  Altura automática para ajustar a proporção */
+    width: auto; /* A largura preenche a div pai */
+    height: 100%; /* Garante que a largura não exceda a largura da div pai */
 
-    @media screen and (max-height: 580px) {
-    width: 50%; 
-    max-width: 40%;
+    @media screen and (max-width: 1500px) {
+        width: 90%;
+        max-width: 90%;
+        height: auto;
+        max-height: 90%;
     }
 
-    @media screen and (max-height: 450px) {
-        width: 50%; 
-        max-width: 30%;
-    }
+    
 
     display: block;
     margin: 0 auto; /* Centraliza a imagem horizontalmente */
