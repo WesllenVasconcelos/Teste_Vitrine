@@ -24,7 +24,10 @@ Object.keys(MENU).forEach(categoria => {
 var categoriasAtivas = [];
 var MEU_CARRINHO = [];
 var MEU_ENDERECO = null;
-
+var categoriasOrganizadas = [['categoria3', 'categoria6', 'categoria8', 'categoria9', 'categoria2', 'categoria5', 'categoria10'],
+                            ['categoria18', 'categoria4', 'categoria7', 'categoria14', 'categoria16', 'categoria17', 'categoria15', 'categoria1', 'categoria19'],
+                            ['categoria11', 'categoria12', 'categoria13']];
+var rotasValidas = ['descartaveis','decoracao','utensilios'];
 var VALOR_CARRINHO = 0;
 var VALOR_ENTREGA = 0;
 
@@ -33,6 +36,7 @@ var CELULAR_EMPRESA = '5592985615995';
 cardapio.eventos = {
 
     init: () => {
+        console.log("Função init está sendo chamada.");
         cardapio.metodos.obterItensCardapio();
         cardapio.metodos.carregarBotaoLigar();
         cardapio.metodos.carregarBotaoReserva();
@@ -43,9 +47,6 @@ cardapio.eventos = {
             cardapio.metodos.obterItensPorPesquisa(termoPesquisa);}
         });
     }
-
-    
-
 }
 
 
@@ -53,9 +54,7 @@ cardapio.metodos = {
 
     // obtem a lista de itens   do cardápio
     obterItensCardapio: (categorias = ['categoria1', 'categoria2', 'categoria3'], vermais = false) => {
-        // Certifica-se de que categorias seja sempre um array
 
-        
         if (!Array.isArray(categorias)) {
             categorias = [categorias];
         }
@@ -135,13 +134,27 @@ cardapio.metodos = {
     },
 
     handleRouteChange: () => {
-        // Obtém a parte da rota após o '#' (hash) na URL
-        var route = window.location.hash.slice(1);
-    
-        console.log("Rota atual:", route);
-    
-        // Chama a função obterItensCardapio com a categoria extraída da rota
-        cardapio.metodos.obterItensCardapio(route ? [route] : [], false);
+        // Obtém a parte da rota após o '&' (hash) na URL
+        var route = window.location.hash.slice(2);
+        var categorias;
+        for (var i = 0; i < rotasValidas.length; i++) {
+            if (route==rotasValidas[i]) {
+                categorias = categoriasOrganizadas[i];
+            }
+        }
+
+        if (categorias !== null) {
+        
+
+        
+        cardapio.metodos.obterItensCardapio(categorias, false);
+        
+        var cardapioAnchor = document.getElementById('cardapio');
+
+        if (cardapioAnchor) {
+            cardapioAnchor.scrollIntoView({ behavior: 'smooth' });
+        }
+        }
     },
 
     // Função para obter itens com base na pesquisa
@@ -310,10 +323,12 @@ cardapio.metodos = {
             $("#itensCarrinho").addClass('hidden');
             $("#localEntrega").removeClass('hidden');
             $("#resumoCarrinho").addClass('hidden');
+            $("#btnContinuarComprando").addClass('hidden');
 
             $(".etapa").removeClass('active');
             $(".etapa1").addClass('active');
             $(".etapa2").addClass('active');
+            
 
             $("#btnEtapaPedido").addClass('hidden');
             $("#btnEtapaEndereco").removeClass('hidden');
@@ -698,6 +713,50 @@ window.addEventListener('hashchange', cardapio.metodos.handleRouteChange);
 
 // Adiciona um ouvinte de evento para a carga inicial da página
 window.addEventListener('load', cardapio.metodos.handleRouteChange);
+
+// >>>>>>>>>>>>>>>>>>>>>>>
+function toggleDropdown() {
+    $(".dropdown-content").toggle();
+}
+
+$(".category").click(function () {
+    const category = $(this).data("category");
+
+    // Verificar se a categoria está ativa
+    const isActive = $(this).hasClass("active");
+
+    // Remover a classe "active" de todas as categorias
+    $(".category").removeClass("active");
+
+    // Ocultar todas as subcategorias
+    $(".subcategory").hide();
+
+    // Se a categoria clicada não estava ativa, marcá-la como ativa e exibir suas subcategorias
+    if (!isActive) {
+        $(this).addClass("active");
+        $(`.subcategory[data-parent="${category}"]`).show();
+    }
+});
+
+// Função para obter categorias/subcategorias selecionadas quando o botão "Confirmar" é clicado
+function obterCategoriasSelecionadas() {
+    const categoriasSelecionadas = [];
+
+    // Percorra os checkboxes e adicione as categorias/subcategorias selecionadas ao array
+    $("input[type='checkbox']:checked").each(function () {
+        categoriasSelecionadas.push($(this).val());
+    });
+
+    // Chame a função obterItensCardapio com as categorias/subcategorias selecionadas
+    cardapio.metodos.obterItensCardapio(categoriasSelecionadas, false);
+
+    // Oculte o dropdown após a seleção
+    $(".dropdown-content").hide();
+}
+
+// Adicione um botão "Confirmar" ao final do dropdown
+$(".dropdown-content").append("<button class='m-2 btn btn-white btn-sm mr-3' onclick='obterCategoriasSelecionadas()'>Confirmar</button>");
+// >>>>>>>>>>>>>>>>>>>>>>>
 
 cardapio.templates = {
 
