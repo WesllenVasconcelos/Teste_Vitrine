@@ -133,15 +133,71 @@
                               </button>
                             </div>
                          </div>
+                        
+                         <div class="m-2 btn btn-white btn-sm mr-3" id="categoryDropdown">
+                            <a onclick="toggleDropdown()">Selecionar Categorias</a>
+                            <div class="dropdown-content">
+
+                                <div class="category" data-category="category1">Descartaveis</div>
+                                <div class="subcategory" data-parent="category1">
+                                    <label><input type="checkbox" value="categoria3"> Copos</label>
+                                    <label><input type="checkbox" value="categoria6"> Pratos</label>
+                                    <label><input type="checkbox" value="categoria8"> Garfos</label>
+                                    <label><input type="checkbox" value="categoria9"> Facas</label>
+                                    <label><input type="checkbox" value="categoria2"> Colheres</label>
+                                    <label><input type="checkbox" value="categoria5"> Guardanapos</label>
+                                    <label><input type="checkbox" value="categoria10"> Kit</label>
+
+                                </div>
+
+                                <div class="category" data-category="category2">Decoração</div>
+                                <div class="subcategory" data-parent="category2">
+                                    <label><input type="checkbox" value="categoria18"> Balões</label>
+                                    <label><input type="checkbox" value="categoria4"> Faixas</label>
+                                    <label><input type="checkbox" value="categoria7"> Velas</label>
+                                    <label><input type="checkbox" value="categoria14"> Placas</label>
+                                    <label><input type="checkbox" value="categoria16"> Topo de Bolo</label>
+                                    <label><input type="checkbox" value="categoria17"> Cortinas</label>
+                                    <label><input type="checkbox" value="categoria15"> Tiaras</label>
+                                    <label><input type="checkbox" value="categoria1"> Chapéus</label>
+                                    <label><input type="checkbox" value="categoria19"> Outros</label>
+                                </div>
+                                
+                                <div class="category" data-category="category3">Utensílios</div>
+                                <div class="subcategory" data-parent="category3">
+                                    <label><input type="checkbox" value="categoria11"> Bandeijas</label>
+                                    <label><input type="checkbox" value="categoria12"> Boleiras</label>
+                                    <label><input type="checkbox" value="categoria13"> Taças</label>
+                                </div>
+                                
+                        
+                                <!-- Adicione mais categorias e subcategorias conforme necessário -->
+                            </div>
+                        </div>
 
                     </div>
                     
 
                     <div class="col-12 col-one container-menu wow fadeInUp">
-                        <a id="menu-categoria1" class="m-2 btn btn-white btn-sm mr-3 active" onclick="cardapio.metodos.obterItensCardapio(['categoria1', 'categoria2', 'categoria3'])">
+
+                        
+                        
+                        <a id="menu-categoria3" class="m-2 btn btn-white btn-sm mr-3 active" onclick="cardapio.metodos.obterItensCardapio(['categoria3', 'categoria6', 'categoria8', 'categoria9', 'categoria2', 'categoria5', 'categoria10'])">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z"/>
-                              </svg>&nbsp; Chapéu + Colher + Copo
+                              </svg>&nbsp; Descartaveis
+                        </a>
+
+                        <a id="menu-categoria18" class="m-2 btn btn-white btn-sm mr-3 active" onclick="cardapio.metodos.obterItensCardapio(['categoria18', 'categoria4', 'categoria7', 'categoria14', 'categoria16', 'categoria17', 'categoria15', 'categoria1', 'categoria19'])">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z"/>
+                              </svg>&nbsp; Decoração
+                        </a>
+
+                        <a id="menu-categoria11" class="m-2 btn btn-white btn-sm mr-3 active" onclick="cardapio.metodos.obterItensCardapio(['categoria11', 'categoria12', 'categoria13'])">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z"/>
+                              </svg>&nbsp; Utensílios
                         </a>
 
                         <!-- 
@@ -156,7 +212,7 @@
                                 <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z"/>
                               </svg>&nbsp; Copo
                         </a>
-                        teste-->
+                        
 
                         <a id="menu-categoria4" class="m-2 btn btn-white btn-sm mr-3" onclick="cardapio.metodos.obterItensCardapio('categoria4')">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-fill" viewBox="0 0 16 16">
@@ -239,7 +295,7 @@
                                 <path fill-rule="evenodd" d="M8.48 10.901C11.211 10.227 13 7.837 13 5A5 5 0 0 0 3 5c0 2.837 1.789 5.227 4.52 5.901l-.244.487a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.244-.487ZM4.352 3.356a4.004 4.004 0 0 1 3.15-2.325C7.774.997 8 1.224 8 1.5c0 .276-.226.496-.498.542-.95.162-1.749.78-2.173 1.617a.595.595 0 0 1-.52.341c-.346 0-.599-.329-.457-.644Z"/>
                               </svg>&nbsp; Outros
                         </a>
-
+                    teste-->
                     </div>
 
                     <div class="col-12 col-one">
@@ -473,9 +529,14 @@
                         </p>
                     </div>
 
-                    <a onclick="cardapio.metodos.carregarEndereco()" class="btn btn-yellow float-right" id="btnEtapaPedido">
-                        Continuar
+                    <a onclick="cardapio.metodos.carregarEndereco()" class="btn btn-white float-right mr-3" id="btnEtapaPedido">
+                        Confirmar pedido
                     </a>
+
+                    <a onclick="cardapio.metodos.abrirCarrinho(false)" class="btn btn-white float-right mr-3" id="btnContinuarComprando">
+                        Continuar comprando
+                    </a>
+
                     <a onclick="cardapio.metodos.resumoPedido()" class="btn btn-yellow float-right hidden" id="btnEtapaEndereco">
                         Revisar pedido
                     </a>
