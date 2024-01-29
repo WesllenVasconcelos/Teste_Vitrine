@@ -55,6 +55,9 @@
             </div>
         </section>
 
+        <!-- 
+
+        
         
         <section class="banner">
             <div class="container">
@@ -103,9 +106,10 @@
                     </div>
                 </div>
             </div>
+
         </section>
 
-
+        -->
 
         <section class="cardapio" id="cardapio">
 
@@ -299,7 +303,7 @@
                     </div>
 
                     <div class="col-12 col-one">
-                        <div class="row" id="itensCardapio">
+                        <div class="row cardapio-col" id="itensCardapio">
 
                             
 
@@ -529,24 +533,28 @@
                         </p>
                     </div>
 
-                    <a onclick="cardapio.metodos.carregarEndereco()" class="btn btn-white float-right mr-3" id="btnEtapaPedido">
-                        Confirmar pedido
-                    </a>
+                    <div class="btn-bottom-container">
 
-                    <a onclick="cardapio.metodos.abrirCarrinho(false)" class="btn btn-white float-right mr-3" id="btnContinuarComprando">
-                        Continuar comprando
-                    </a>
+                        <a onclick="cardapio.metodos.carregarEndereco()" class="btn btn-white float-right mr-3 btn-bottom" id="btnEtapaPedido">
+                            Confirmar pedido
+                        </a>
+    
+                        <a onclick="cardapio.metodos.abrirCarrinho(false)" class="btn btn-white float-right mr-3 btn-bottom" id="btnContinuarComprando">
+                            Continuar comprando
+                        </a>
+    
+                        <a onclick="cardapio.metodos.resumoPedido()" class="btn btn-yellow float-right hidden btn-bottom" id="btnEtapaEndereco">
+                            Revisar pedido
+                        </a>
+                        <a href="#" class="btn btn-yellow float-right hidden btn-bottom" id="btnEtapaResumo" target="_blank">
+                            Enviar pedido
+                        </a>
+    
+                        <a onclick="cardapio.metodos.voltarEtapa()" class="btn btn-white float-right mr-3 hidden btn-bottom" id="btnVoltar">
+                            Voltar
+                        </a>
 
-                    <a onclick="cardapio.metodos.resumoPedido()" class="btn btn-yellow float-right hidden" id="btnEtapaEndereco">
-                        Revisar pedido
-                    </a>
-                    <a href="#" class="btn btn-yellow float-right hidden" id="btnEtapaResumo" target="_blank">
-                        Enviar pedido
-                    </a>
-
-                    <a onclick="cardapio.metodos.voltarEtapa()" class="btn btn-white float-right mr-3 hidden" id="btnVoltar">
-                        Voltar
-                    </a>
+                    </div>
 
                 </div>
             </div>
@@ -554,7 +562,9 @@
 
         </div>
 
-        <div class="popup-container-image-zoom hidden" id="popup_image_zoom" onclick="cardapio.metodos.fecharPopupImagemAmpliada()"></div>
+        <div class="popup-image-zoom hidden" id="popup_image_zoom" >
+        </div>
+          
 
         <script type="text/javascript" src="./js/jquery-1.12.4.min.js"></script>
         <script type="text/javascript" src="./js/modernizr-3.5.0.min.js"></script>
