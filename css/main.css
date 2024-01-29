@@ -306,6 +306,7 @@ a.navbar-brand {
     margin-bottom: 40px;
 }
 
+
 .card-item {
     height: 360px;
 }
@@ -841,15 +842,21 @@ select.form-control {
     margin-bottom: 10px;
 }
 
-.popup-container-image-zoom {
+
+/*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+
+.popup-image-zoom {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    display: flex;
   }
-  
+
   .popup-content-image-zoom {
     position: fixed;
     top: 50%;
@@ -857,8 +864,10 @@ select.form-control {
     transform: translate(-50%, -50%);
     background: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    padding: 20px; /* adicionado padding para criar uma área de respiro */
-  
+    padding: 20px; 
+    border-radius: 5px;
+    overflow: hidden; /* Garante que a imagem não ultrapasse o pop-up */
+
     /* Configuração responsiva para larguras maiores que 1000px */
     width: 70%;
     max-width: 90%;
@@ -873,37 +882,72 @@ select.form-control {
       max-height: 90%;
     }
   }
-  
-  .image-zoom {
-    /*height: 80%;  Altura automática para ajustar a proporção */
-    width: auto; /* A largura preenche a div pai */
-    height: 100%; /* Garante que a largura não exceda a largura da div pai */
 
-    @media screen and (max-width: 1500px) {
-        width: 90%;
-        max-width: 90%;
-        height: auto;
-        max-height: 90%;
-    }
-
-    
-
-    display: block;
-    margin: 0 auto; /* Centraliza a imagem horizontalmente */
-  }
-  
-  .fechar {
+  .closePopupInsideBtn {
     position: absolute;
     top: 10px;
     right: 10px;
-    width: 35px; /* ajuste conforme necessário; tamanho da área clicável do botão */
-    height: 35px;
-    line-height: 25px;
-    text-align: center;
+    bottom: 10px;
+    right: 10px;
+    width: 40px; /* Largura do botão */
+    height: 40px; /* Altura do botão */
+    border-radius: 50%; /* Torna o botão um círculo */
+    background-color: #9a9a9ab9;
+    color: #fff;
+    border: none;
     cursor: pointer;
-    border-radius: 50%; /* para torná-lo circular */
-    background: #717171; /* cor de fundo cinza */
-    color: #fff; /* cor do texto do botão */
-    padding: 5px; /* adicionado padding para afastar o botão da borda da div */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
   }
+
+  .popup-content-image-zoom img {
+    max-width: 100%; /* A imagem não ultrapassará a largura do pop-up */
+    max-height: 100%; /* A imagem não ultrapassará a altura do pop-up */
+    height: auto; /* Mantém a proporção original da imagem */
+    display: block; /* Remove espaço extra abaixo da imagem */
+    margin: 0 auto; /* Centraliza a imagem horizontalmente */
+  }
+
+
+/*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+.pagination-button-lft {
+    position: absolute;
+    top: 50%;
+    left: 10px; /* Ajuste a distância da borda esquerda conforme necessário */
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.pagination-button-rght {
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Ajuste a distância da borda direita conforme necessário */
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.pagination-button {
+    
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #d1d1d1;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 32px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    margin: 0 10px; /* Espaço entre os botões e a div */
+  }
+  
+.pagination-button:hover {
+    background-color: #89898994;
+    color: #ffffff;
+}
+
+.pagination-button:focus {
+    outline: none;
+}
   
