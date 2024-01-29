@@ -6,6 +6,10 @@ var cardapio = {};
 
 var todosItensArray = [];
 
+var itemExibidosNoMenu=[];
+
+var indiceAtualIamagem = 0;
+
 Object.keys(MENU).forEach(categoria => {
     // Iterar sobre os itens da categoria atual
     MENU[categoria].forEach(item => {
@@ -62,7 +66,7 @@ cardapio.metodos = {
         categoriasAtivas = categorias;
 
         // Inicializa um array para armazenar todos os itens das categorias selecionadas
-        var todosItens = [];
+        itemExibidosNoMenu = [];
     
         // Itera sobre cada categoria
         categorias.forEach(categoria => {
@@ -70,11 +74,11 @@ cardapio.metodos = {
             var itensCategoria = MENU[categoria];
     
             // Adiciona os itens ao array geral
-            todosItens = todosItens.concat(itensCategoria.map(item => ({ ...item, categoria: categoria })));
+            itemExibidosNoMenu = itemExibidosNoMenu.concat(itensCategoria.map(item => ({ ...item, categoria: categoria })));
 
         });
 
-        console.log("Tamanho total da lista -> ", todosItens.length);
+        console.log("Tamanho total da lista -> ", itemExibidosNoMenu.length);
     
         // Se não for "Ver Mais", limpa o conteúdo
         if (!vermais) {
@@ -87,12 +91,12 @@ cardapio.metodos = {
         console.log('Ultimo index exibido -> 2° vez ',lastIndex);
     
         // Itera sobre os itens a partir do índice do último item exibido
-        for (var i = lastIndex; i < todosItens.length && i < lastIndex + 50; i++) {
-            let temp = cardapio.templates.item.replace(/\${img}/g, todosItens[i].img)
-                .replace(/\${nome}/g, todosItens[i].name)
-                .replace(/\${preco}/g, todosItens[i].price.toFixed(2).replace('.', ','))
-                .replace(/\${id}/g, todosItens[i].id)
-                .replace(/\${categoria}/g, todosItens[i].categoria);
+        for (var i = lastIndex; i < itemExibidosNoMenu.length && i < lastIndex + 50; i++) {
+            let temp = cardapio.templates.item.replace(/\${img}/g, itemExibidosNoMenu[i].img)
+                .replace(/\${nome}/g, itemExibidosNoMenu[i].name)
+                .replace(/\${preco}/g, itemExibidosNoMenu[i].price.toFixed(2).replace('.', ','))
+                .replace(/\${id}/g, itemExibidosNoMenu[i].id)
+                .replace(/\${categoria}/g, itemExibidosNoMenu[i].categoria);
     
             // Adiciona os itens ao #itensCardapio
             $("#itensCardapio").append(temp);
@@ -110,7 +114,7 @@ cardapio.metodos = {
         });
     
         // Se for "Ver Mais", oculta o botão após adicionar os itens
-        if (lastIndex == todosItens.length) {
+        if (lastIndex == itemExibidosNoMenu.length) {
             console.log("Ocultou o botão ver mais ->", lastIndex);
             $("#btnVerMais").addClass('hidden');
         }
@@ -162,8 +166,9 @@ cardapio.metodos = {
     // Certifica-se de que a pesquisa seja uma string
     pesquisa = pesquisa.toString().toLowerCase();
 
+    itemExibidosNoMenu = []
     // Filtra os itens com base na pesquisa
-    var itensPesquisados = todosItensArray.filter(item =>
+    itemExibidosNoMenu = todosItensArray.filter(item =>
         item.name.toLowerCase().includes(pesquisa) || item.categoria.toLowerCase().includes(pesquisa)
     );
 
@@ -171,7 +176,7 @@ cardapio.metodos = {
     $("#itensCardapio").html('');
 
     // Itera sobre os itens correspondentes à pesquisa
-    itensPesquisados.slice(0, 20).forEach(item => {
+    itemExibidosNoMenu.slice(0, 20).forEach(item => {
         let temp = cardapio.templates.item.replace(/\${img}/g, item.img)
             .replace(/\${nome}/g, item.name)
             .replace(/\${preco}/g, item.price.toFixed(2).replace('.', ','))
@@ -189,13 +194,66 @@ cardapio.metodos = {
         cardapio.metodos.obterItensPorPesquisa(pesquisa);
     },
 
-    mostrarFotodoProdutoAmpliada: (img) =>{
+    mostrarFotodoProdutoAmpliada: (img, nome, id) =>{
+
+        
+        indiceAtualIamagem = itemExibidosNoMenu.findIndex(item => item.id === id);
+
+        $(".dropdown-content").hide();
         $("#popup_image_zoom").html('');
         $("#popup_image_zoom").removeClass('hidden');
 
-        let temp = cardapio.templates.itemPopup.replace(/\${img}/g, img);
+        let temp = cardapio.templates.itemPopup.replace(/\${img}/g, img)
+        .replace(/\${titulo}/g, nome);
         $("#popup_image_zoom").append(temp);
-        console.log(img);
+        ajustarTamanhoImagem();
+        
+        cardapio.metodos.atualizarVisibilidadeBotoes();
+    },
+
+    exibirImagemAtual: () => {
+
+        let item = itemExibidosNoMenu[indiceAtualIamagem];
+
+        $("#popupImage").attr("src", item.img);
+        $("#popupImageName").text(item.name);
+    
+    },
+
+    navegarParaAnterior: () => {
+        if (indiceAtualIamagem > 0) {
+            indiceAtualIamagem--;
+            cardapio.metodos.exibirImagemAtual();
+            cardapio.metodos.atualizarVisibilidadeBotoes();
+            
+        }
+    },
+
+    navegarParaProxima: () => {
+        if (indiceAtualIamagem < itemExibidosNoMenu.length - 1) {
+            indiceAtualIamagem++;
+            cardapio.metodos.exibirImagemAtual();
+            cardapio.metodos.atualizarVisibilidadeBotoes();
+            
+        }
+    },
+
+    atualizarVisibilidadeBotoes: () => {
+
+        $("#prevButton").addClass('hidden');
+        $("#nextButton").addClass('hidden');
+    
+        // Verifica se há uma imagem anterior e exibe o botão "Anterior" se necessário
+        if (indiceAtualIamagem > 0) {
+            
+            $("#prevButton").removeClass('hidden');
+        }
+
+        // Verifica se há uma próxima imagem e exibe o botão "Próximo" se necessário
+        if (indiceAtualIamagem < itemExibidosNoMenu.length - 1) {
+            
+            $("#nextButton").removeClass('hidden');
+        }
     },
 
     fecharPopupImagemAmpliada: () => {
@@ -711,8 +769,19 @@ cardapio.metodos = {
 // Adiciona um ouvinte de evento para a mudança de hash na URL
 window.addEventListener('hashchange', cardapio.metodos.handleRouteChange);
 
+// Atualiza o tamanho da imagem quando a janela é redimensionada
+window.addEventListener('resize', ajustarTamanhoImagem);
+
 // Adiciona um ouvinte de evento para a carga inicial da página
 window.addEventListener('load', cardapio.metodos.handleRouteChange);
+
+window.addEventListener('load', cardapio.metodos.handleRouteChange);
+
+window.addEventListener('click', function(event) {
+    if (event.target === document.getElementById('#popup_image_zoom')) {
+        cardapio.metodos.fecharPopupImagemAmpliada();
+    }
+  });
 
 // >>>>>>>>>>>>>>>>>>>>>>>
 function toggleDropdown() {
@@ -738,6 +807,27 @@ $(".category").click(function () {
     }
 });
 
+function ajustarTamanhoImagem() {
+    let popupImage = document.getElementById("popupImage");
+    let popupContent = document.getElementById("popup-content-image-zoom");
+
+    // Reinicia as dimensões da imagem
+    popupImage.style.width = 'auto';
+    popupImage.style.height = 'auto';
+
+    var tamanhoAtual = Math.min(popupContent.offsetWidth, popupContent.offsetHeight);
+    var tamanhoLimite = tamanhoAtual * 0.8; // 80% do tamanho atual do pop-up
+
+    // Define as novas dimensões da imagem
+    popupImage.style.width = tamanhoLimite + 'px';
+    popupImage.style.height = tamanhoLimite + 'px';
+
+    console.log("Altura do pop-up " + popupImage.style.height);
+    console.log("Largura da img " + popupImage.style.width);
+    console.log("Altura da img " + popupImage.style.height);
+}
+
+
 // Função para obter categorias/subcategorias selecionadas quando o botão "Confirmar" é clicado
 function obterCategoriasSelecionadas() {
     const categoriasSelecionadas = [];
@@ -761,9 +851,9 @@ $(".dropdown-content").append("<button class='m-2 btn btn-white btn-sm mr-3' onc
 cardapio.templates = {
 
     item: `
-        <div class="col-12 col-lg-3 col-md-3 col-sm-6 mb-5 animated fadeInUp">
+        <div class="card-item-content col-12 col-lg-3 col-md-3 col-sm-6 mb-5 animated fadeInUp">
             <div class="card card-item" id="\${id}">
-                <div class="img-produto" onclick="cardapio.metodos.mostrarFotodoProdutoAmpliada('\${img}')">
+                <div class="img-produto" onclick="cardapio.metodos.mostrarFotodoProdutoAmpliada('\${img}','\${nome}','\${id}')">
                     <img src="\${img}" />
                 </div>
                 <p class="title-produto text-center mt-4">
@@ -820,10 +910,13 @@ cardapio.templates = {
     `,
 
     itemPopup:`
-            <div class="popup-content-image-zoom">
-                    <span class="fechar" onclick="cardapio.metodos.fecharPopupImagemAmpliada()">&times;</span>
-                    <img class="image-zoom" src="\${img}" alt="Imagem Ampliada">
+        <button class="pagination-button pagination-button-lft" id="prevButton" onclick="cardapio.metodos.navegarParaAnterior()">&lt;</button>
+            <div class="popup-content-image-zoom" id="popup-content-image-zoom" onclick="event.stopPropagation()">
+                <span class="closePopupInsideBtn" id="closePopupInsideBtn" onclick="cardapio.metodos.fecharPopupImagemAmpliada()">&times;</span>
+                <p id="popupImageName">\${titulo}</p>
+                <img id="popupImage" src="\${img}" alt="\${titulo}">         
             </div>
+        <button class="pagination-button pagination-button-rght" id="nextButton" onclick="cardapio.metodos.navegarParaProxima()">&gt;</button>
     `
 
 }
